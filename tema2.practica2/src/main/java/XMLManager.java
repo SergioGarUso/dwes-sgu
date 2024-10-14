@@ -14,7 +14,7 @@ public class XMLManager {
                 if (file.exists()) {
                     return xmlMapper.readValue(file, ProtectoraDeAnimales.class);
                 } else {
-                    System.out.println("El archivo no existe. Se devolverá una nueva ProtectoraDeAnimales vacía.");
+                    System.out.println("El archivo no existe.");
                     return new ProtectoraDeAnimales();
                 }
             } catch (IOException e) {

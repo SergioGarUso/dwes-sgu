@@ -46,26 +46,26 @@ public class ProtectoraDeAnimales {
         String id = scanner.nextLine();
 
         Iterator<Animal> it = animales.iterator();
-        boolean eliminado = false;
+        boolean deleted = false;
 
         while (it.hasNext()) {
             Animal animal = it.next();
             if (animal.getId().equals(id)) {
                 it.remove();
-                eliminado = true;
-                System.out.println("Animal con ID " + id + " ha sido borrado.");
+                deleted = true;
+                System.out.println("Animal con ID " + id + " borrado.");
                 break;
             }
         }
 
-        if (!eliminado) {
+        if (!deleted) {
             System.out.println("Animal no encontrado.");
         }
     }
 
 
     public void consultarAnimal(Scanner scanner) {
-        System.out.print("Introduce el ID del animal a consultar: ");
+        System.out.print("Introduce el ID del animal para buscarlo: ");
         String id = scanner.nextLine();
 
         for (Animal animal : animales) {
@@ -77,7 +77,7 @@ public class ProtectoraDeAnimales {
         }
     }
 
-    public void mostrarTodosLosAnimales() {
+    public void mostrarTodosAnimales() {
         if (animales.isEmpty()) {
             System.out.println("No hay animales en la protectora.");
         } else {
