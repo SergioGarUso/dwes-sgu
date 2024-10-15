@@ -11,6 +11,7 @@
     <modules>
         <module>tema2.practica2</module>
         <module>tema2.practica3</module>
+        <module>tema2.practica4</module>
     </modules>
 
     <properties>
