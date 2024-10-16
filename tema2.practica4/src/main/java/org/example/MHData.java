@@ -18,4 +18,5 @@ public class MHData {
     private String nombre;
 
     private String url="https://mhw-db.com/monsters/"+id;
+
 }
