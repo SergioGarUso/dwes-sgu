@@ -194,7 +194,7 @@ public class Main {
                     break;
                 case 6:
                     System.out.println("Número de estudiantes por casa");
-                    // Llamada al método correspondiente
+                    contarEstudiantesPorCasa(casas, estudiantes);
                     break;
                 case 7:
                     System.out.println("Estudiantes matriculados en una asignatura específica (Defensa Contra las Artes Oscuras)");
@@ -295,6 +295,21 @@ public class Main {
         }
         return estudiantesSinMascota;
     }
+    public static void contarEstudiantesPorCasa(List<Casa> casas, List<Estudiante> estudiantes) {
+
+        for (Casa casa : casas) {
+            int contador = 0;
+
+            for (Estudiante estudiante : estudiantes) {
+                if (estudiante.getId_casa() == casa.getId_casa()) {
+                    contador++;
+                }
+            }
+
+            System.out.println("Casa " + casa.getNombre_casa() + ": " + contador + " estudiante(s)");
+        }
+    }
+
 
 
 
