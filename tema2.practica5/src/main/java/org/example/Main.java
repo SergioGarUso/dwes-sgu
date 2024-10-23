@@ -186,7 +186,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Listar estudiantes sin mascota");
-                    // Llamada al método correspondiente
+                    System.out.println(listarEstudiantesSinMascota(estudiantes,mascotas));
                     break;
                 case 5:
                     System.out.println("Promedio de calificaciones de un estudiante (Harry Potter)");
@@ -276,6 +276,24 @@ public class Main {
             }
         }
         return null;
+    }
+
+    public static List<Estudiante> listarEstudiantesSinMascota(List<Estudiante> estudiantes, List<Mascota> mascotas) {
+        List<Estudiante> estudiantesSinMascota = new ArrayList<>();
+
+        for (Estudiante estudiante : estudiantes) {
+            boolean tieneMascota = false;
+            for (Mascota mascota : mascotas) {
+                if (mascota.getId_estudiante() == estudiante.getId_estudiante()) {
+                    tieneMascota = true;
+                    break;
+                }
+            }
+            if (!tieneMascota) {
+                estudiantesSinMascota.add(estudiante);
+            }
+        }
+        return estudiantesSinMascota;
     }
 
 
