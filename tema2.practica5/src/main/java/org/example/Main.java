@@ -15,6 +15,9 @@ public class Main {
         List<Mascota> mascotas = new ArrayList<>();
         List<Asignatura> asignaturas = new ArrayList<>();
         List<Profesor> profesores = new ArrayList<>();
+        List<Estudiante_Asignatura> estudianteAsignaturas = new ArrayList<>();
+
+
 
         try (Connection conexion = DriverManager.getConnection(urlConexion, usuario, password)) {
             try {
@@ -147,6 +150,25 @@ public class Main {
                 System.err.println(ex1.getClass().getName() + ": " + ex1.getMessage());
 
             }
+
+            try {
+                conexion.setAutoCommit(false);
+
+                String consultaSQL = "SELECT * FROM Estudiante_Asignatura";
+                PreparedStatement consulta = conexion.prepareStatement(consultaSQL);
+                ResultSet resultados = consulta.executeQuery();
+
+                while (resultados.next()) {
+                    Estudiante_Asignatura ea = new Estudiante_Asignatura(
+                            resultados.getInt("id_estudiante"),
+                            resultados.getInt("id_asignatura"),
+                            resultados.getFloat("calificacion")
+                    );
+                    estudianteAsignaturas.add(ea);
+                }
+            } catch (SQLException ex1) {
+                System.err.println(ex1.getClass().getName() + ": " + ex1.getMessage());
+            }
         } catch (SQLException ex) {
             System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
         }
@@ -190,7 +212,11 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("Promedio de calificaciones de un estudiante (Harry Potter)");
-                    // Llamada al método correspondiente
+                    System.out.println("Promedio de calificaciones de un estudiante (Harry Potter)");
+                    float promedio = calcularPromedioCalificaciones(estudianteAsignaturas, "Harry Potter", estudiantes);
+                    if (promedio != -1) {
+                        System.out.println("El promedio de calificaciones de Harry Potter es: " + promedio);
+                    }
                     break;
                 case 6:
                     System.out.println("Número de estudiantes por casa");
@@ -308,6 +334,40 @@ public class Main {
 
             System.out.println("Casa " + casa.getNombre_casa() + ": " + contador + " estudiante(s)");
         }
+    }
+
+    public static float calcularPromedioCalificaciones(List<Estudiante_Asignatura> estudianteAsignaturas, String nombreEstudiante, List<Estudiante> estudiantes) {
+        int idEstudiante = -1;
+
+
+        for (Estudiante estudiante : estudiantes) {
+            if (estudiante.getNombre().equalsIgnoreCase(nombreEstudiante)) {
+                idEstudiante = estudiante.getId_estudiante();
+                break;
+            }
+        }
+
+        if (idEstudiante == -1) {
+            System.out.println("No se encontró al estudiante con nombre: " + nombreEstudiante);
+            return -1;
+        }
+
+        float sumaCalificaciones = 0;
+        int totalAsignaturas = 0;
+
+        for (Estudiante_Asignatura ea : estudianteAsignaturas) {
+            if (ea.getId_estudiante() == idEstudiante) {
+                sumaCalificaciones += ea.getCalificacion();
+                totalAsignaturas++;
+            }
+        }
+
+        if (totalAsignaturas == 0) {
+            System.out.println("El estudiante no tiene calificaciones registradas.");
+            return -1;
+        }
+
+        return sumaCalificaciones / totalAsignaturas;
     }
 
 
