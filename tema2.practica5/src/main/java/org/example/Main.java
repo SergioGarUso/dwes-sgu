@@ -177,7 +177,7 @@ public class Main {
         int opcion;
 
         do {
-            System.out.println("=== Menú Principal ===");
+
             System.out.println("1. Consulta de estudiantes por casa (Gryffindor)");
             System.out.println("2. Listado de todas las asignaturas obligatorias");
             System.out.println("3. Obtener la mascota de un estudiante específico (Hermione Granger)");
@@ -212,7 +212,6 @@ public class Main {
                     break;
                 case 5:
                     System.out.println("Promedio de calificaciones de un estudiante (Harry Potter)");
-                    System.out.println("Promedio de calificaciones de un estudiante (Harry Potter)");
                     float promedio = calcularPromedioCalificaciones(estudianteAsignaturas, "Harry Potter", estudiantes);
                     if (promedio != -1) {
                         System.out.println("El promedio de calificaciones de Harry Potter es: " + promedio);
@@ -224,19 +223,34 @@ public class Main {
                     break;
                 case 7:
                     System.out.println("Estudiantes matriculados en una asignatura específica (Defensa Contra las Artes Oscuras)");
-                    // Llamada al método correspondiente
+
                     break;
                 case 8:
                     System.out.println("Insertar un nuevo estudiante");
-                    // Llamada al método correspondiente
+                    mostrarEstudiantesPorAsignatura(estudiantes, asignaturas, estudianteAsignaturas, "Defensa Contra las Artes Oscuras");
                     break;
                 case 9:
                     System.out.println("Modificar el aula de una asignatura");
-                    // Llamada al método correspondiente
+                    scanner.nextLine();  // Limpiar el buffer del scanner
+                    System.out.print("Introduce el nombre de la asignatura: ");
+                    String nombreAsignatura = scanner.nextLine();
+                    System.out.print("Introduce el nuevo aula: ");
+                    String nuevoAula = scanner.nextLine();
+
+                    try (Connection conexion = DriverManager.getConnection(urlConexion, usuario, password)) {
+                        try {
+                            modificarAulaAsignatura(conexion, asignaturas, nombreAsignatura, nuevoAula);
+                        } catch (SQLException e) {
+                            System.out.println("Error al modificar el aula: " + e.getMessage());
+                        }
+                    } catch (SQLException ex) {
+                        System.err.println(ex.getClass().getName() + ": " + ex.getMessage());
+                    }
                     break;
+
                 case 10:
                     System.out.println("Desmatricular a un estudiante de una asignatura");
-                    // Llamada al método correspondiente
+
                     break;
                 case 0:
                     System.out.println("Saliendo del programa...");
@@ -370,7 +384,63 @@ public class Main {
         return sumaCalificaciones / totalAsignaturas;
     }
 
+    public static void mostrarEstudiantesPorAsignatura(List<Estudiante> estudiantes, List<Asignatura> asignaturas, List<Estudiante_Asignatura> estudianteAsignaturas, String nombreAsignatura) {
+        int idAsignatura = 0;
 
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getNombre_asignatura().equalsIgnoreCase(nombreAsignatura)) {
+                idAsignatura = asignatura.getId_asignatura();
+                break;
+            }
+        }
+
+        System.out.println("Estudiantes matriculados en la asignatura " + nombreAsignatura + ":");
+        for (Estudiante_Asignatura ea : estudianteAsignaturas) {
+            if (ea.getId_asignatura() == idAsignatura) {
+                for (Estudiante estudiante : estudiantes) {
+                    if (estudiante.getId_estudiante() == ea.getId_estudiante()) {
+                        System.out.println(estudiante.getNombre() + " " + estudiante.getApellido());
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public static void modificarAulaAsignatura(Connection conexion, List<Asignatura> asignaturas, String nombreAsignatura, String nuevoAula) throws SQLException {
+        int idAsignatura = 0;
+
+        for (Asignatura asignatura : asignaturas) {
+            if (asignatura.getNombre_asignatura().equalsIgnoreCase(nombreAsignatura)) {
+                idAsignatura = asignatura.getId_asignatura();
+                break;
+            }
+        }
+
+        String updateSQL = "UPDATE Asignatura SET aula = ? WHERE id_asignatura = ?";
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(updateSQL)) {
+            preparedStatement.setString(1, nuevoAula);
+            preparedStatement.setInt(2, idAsignatura);
+
+            int filasActualizadas = preparedStatement.executeUpdate();
+
+            if (filasActualizadas > 0) {
+                System.out.println("El aula de la asignatura " + nombreAsignatura + " ha sido actualizada a " + nuevoAula);
+
+                for (Asignatura asignatura : asignaturas) {
+                    if (asignatura.getId_asignatura() == idAsignatura) {
+                        asignatura.setAula(nuevoAula);
+                        break;
+                    }
+                }
+            } else {
+                System.out.println("No se pudo actualizar el aula.");
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error al actualizar el aula: " + ex.getMessage());
+            conexion.rollback();
+        }
+    }
 
 
 }
