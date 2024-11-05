@@ -1,7 +1,17 @@
 package org.example;
 
-
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.codecs.configuration.CodecProvider;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 import org.example.entitites.Profile;
+
+import static com.mongodb.MongoClientSettings.getDefaultCodecRegistry;
+import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
+import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoDBManager {
 
@@ -25,7 +35,9 @@ public class MongoDBManager {
 
 
     public void createProfile(String name, String status, int age) {
-        throw new UnsupportedOperationException("Funcionalidad no implementada");
+        myProfile = new Profile(name, status, age);
+        profiles.insertOne(myProfile);
+
     }
 
     public void publishPost(String title, String content) {
