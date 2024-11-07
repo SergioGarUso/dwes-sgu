@@ -27,21 +27,21 @@ public class  Profile {
     List<Post> posts; // lista de amigos del perfil
 
     @BsonCreator
-    public Profile(@BsonProperty(value = "name") String name, @BsonProperty(value = "status") String status, @BsonProperty(value = "age") int age, @BsonProperty(value = "since") LocalDate since) {
-        this.name = name;
-        this.status = status;
-        this.age = age;
-        this.since = since;
-        this.posts = new ArrayList<>();
-    }
-
-    @BsonCreator
     public Profile(@BsonProperty(value = "name") String name, @BsonProperty(value = "status") String status, @BsonProperty(value = "age") int age) {
         this.name = name;
         this.status = status;
         this.age = age;
         this.since = LocalDate.now();
         this.posts = new ArrayList<>();
+    }
+
+    @BsonCreator
+    public Profile(@BsonProperty(value = "name") String name, @BsonProperty(value = "status") String status, @BsonProperty(value = "age") int age, @BsonProperty(value = "posts") List<Post> posts) {
+        this.name = name;
+        this.status = status;
+        this.age = age;
+        this.since = LocalDate.now();
+        this.posts = posts;
     }
 
     @Override
