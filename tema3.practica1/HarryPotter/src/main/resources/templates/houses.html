@@ -2,15 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casas</title>
+    <link rel="stylesheet" href="/css/houses.css">
 </head>
 <body>
-    <h1>House</h1>
-    <ul>
+<header>
+    <h1>Casas</h1>
+    <a href="/" class="back-link">Ir a Índice</a>
+</header>
+
+<main>
+    <ul class="house-list">
         <li th:each="house : ${houses}">
-            <a th:href="@{'/houses/' + ${house.getName()}}"><span th:text="${house.getName()}"></span></a>
+            <a th:href="@{'/house/' + ${house.getName()}}" class="house-link">
+                <span th:text="${house.getName()}"></span>
+            </a>
         </li>
     </ul>
+</main>
 </body>
 </html>

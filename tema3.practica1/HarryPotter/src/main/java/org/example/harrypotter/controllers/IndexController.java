@@ -1,5 +1,4 @@
 package org.example.harrypotter.controllers;
-
 import lombok.Getter;
 import org.example.harrypotter.entities.House;
 import org.example.harrypotter.entities.Student;
@@ -19,27 +18,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 @Controller
-public class HouseController {
+public class IndexController {
+
     private HouseService houseService = new HouseServiceImplementation(new HouseRepository());
     private StudentService studentService = new StudentServiceImplementation(new StudentRepository());
 
-    @GetMapping("/houses")
-    public String listHouses(Model model) {
+    @GetMapping("/")
+    public String createIndex(Model model) {
         List<House> houses = houseService.getHouses();
-        model.addAttribute("houses", houses);
-        return "houses";
+        List<Student> students = studentService.getStudents();
+        Random random = new Random();
+
+        House houseRandom = houses.get(random.nextInt(houses.size()));
+        model.addAttribute("houseRandom", houseRandom);
+
+        Student studentRandom = students.get(random.nextInt(students.size()));
+        model.addAttribute("studentRandom", studentRandom);
+        return "index";
     }
-
-
-    @GetMapping("/house/{house}")
-    public String showCasa(@PathVariable String house, Model model) {
-        House chosenHouse = houseService.getHouseByName(house);
-        model.addAttribute("myHouse", chosenHouse);
-        model.addAttribute("students", studentService.getStudentsByHouse(house));
-        return "house";
-    }
-
-
 }

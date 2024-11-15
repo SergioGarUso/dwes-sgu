@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiante</title>
+    <link rel="stylesheet" href="/css/student.css">
+</head>
+<body>
+<header>
+    <h1 th:text="${student.getName()}"></h1>
+</header>
+
+<main>
+    <section class="student-details">
+        <p>
+            Casa:<a th:href="@{'/house/' + ${student.getHouse().getName()}}" th:text="${student.getHouse().getName()}" class="house-link"></a>
+        </p>
+        <p>
+            Patronus:<span th:text="${student.getPatronus()}"></span>
+        </p>
+    </section>
+</main>
+</body>
+</html>

@@ -2,16 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudiantes de la Casa</title>
+    <link rel="stylesheet" href="/css/house.css">
 </head>
 <body>
-<h1>Estudiantes de la casa <span th:text="${myHouse.name}"></span></h1>
-<p th:text="'Patron ' + ${myHouse.founder} + '||| Mascota ' + ${myHouse.mascot}"></p>
+<header>
+    <h1>Estudiantes de la Casa <span th:text="${myHouse.name}"></span></h1>
+    <a href="/houses" class="back-link">Volver a todas las casas</a>
+</header>
 
-    <ul>
-        <li th:each="student : ${students}">
-            <span th:text="${student.getName()}"></span>
-        </li>
-    </ul>
+<main>
+    <section class="house-details">
+        <p th:text="'Patrón: ' + ${myHouse.founder}"></p>
+        <p th:text="'Mascota: ' + ${myHouse.mascot}"></p>
+    </section>
+
+    <section class="student-list">
+        <ul>
+            <li th:each="student : ${students}">
+                <a th:href="@{'/student?name=' + ${student.getName()}}" th:text="${student.getName()}" class="student-link"></a>
+            </li>
+        </ul>
+    </section>
+</main>
 </body>
 </html>

@@ -21,25 +21,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class HouseController {
+public class StudentController {
+
     private HouseService houseService = new HouseServiceImplementation(new HouseRepository());
     private StudentService studentService = new StudentServiceImplementation(new StudentRepository());
 
-    @GetMapping("/houses")
-    public String listHouses(Model model) {
-        List<House> houses = houseService.getHouses();
-        model.addAttribute("houses", houses);
-        return "houses";
+    @GetMapping("/student")
+    public String showStudents(@RequestParam String name, Model model) {
+        Student student = studentService.getStudentByName(name);
+        model.addAttribute("student", student);
+        return "student";
     }
-
-
-    @GetMapping("/house/{house}")
-    public String showCasa(@PathVariable String house, Model model) {
-        House chosenHouse = houseService.getHouseByName(house);
-        model.addAttribute("myHouse", chosenHouse);
-        model.addAttribute("students", studentService.getStudentsByHouse(house));
-        return "house";
-    }
-
-
 }
