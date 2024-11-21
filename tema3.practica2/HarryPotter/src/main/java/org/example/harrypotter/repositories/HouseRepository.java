@@ -31,11 +31,10 @@ public class HouseRepository {
         houses.add(house);
     }
     public void updateHouse(String name, House house) {
-        for (House h : houses) {
-            if (h.getName().equals(name)) {
-                h.setName(house.getName());
-                h.setMascot(house.getMascot());
-                h.setFounder(house.getFounder());
+        for (int i = 0; i < houses.size(); i++) {
+            if (houses.get(i).getName().equals(name)) {
+                houses.set(i, house);
+                break;
             }
         }
     }
