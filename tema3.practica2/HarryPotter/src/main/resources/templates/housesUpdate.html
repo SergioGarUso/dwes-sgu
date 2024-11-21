@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario para crear casas</title>
+    <title>Actualizar Casa</title>
 </head>
 <body>
-    <h1>Formulario para crear casas</h1>
-    <form action="#" th:action="@{/house/create}" th:object="${house}" method="post">
+    <h1>Actualizar Casa</h1>
+    <form action="#" th:action="@{/house/update}" th:object="${house}" method="post">
         <label for="name">Nombre de la casa:</label>
         <input type="text" id="name" name="name" th:field="*{name}" required>
         <br>
@@ -16,8 +16,7 @@
         <label for="mascot">Mascota:</label>
         <input type="text" id="mascot" name="mascot" th:field="*{mascot}" required>
         <br>
-        <button type="submit">Crear Casa</button> <button type="reset">Limpiar</button>
-    </form>
-    <a href="/houses">Volver a Casas</a>
+        <input type="hidden" name="id" th:value="${house.id}">
+        <button type="submit">Actualizar Casa</button> <button type="reset">Limpiar</button>
 </body>
 </html>

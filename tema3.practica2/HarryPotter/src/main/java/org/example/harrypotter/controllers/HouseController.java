@@ -45,14 +45,20 @@ public class HouseController {
 
     @GetMapping("/house/create")
     public String crearHouses(Model model) {
-        model.addAttribute("houses", new House());
+        model.addAttribute("house", new House());
         return "housesCreate";
     }
+
     @PostMapping("/house/create")
     public String addHouse(House house) {
         houseService.addHouse(house);
         return "redirect:/houses";
     }
 
+    @GetMapping("/house/update/{name}")
+    public String updateBook(@PathVariable String name, Model model) {
+        model.addAttribute("house", houseService.getHouseByName(name));
+        return "housesUpdate";
+    }
 
 }

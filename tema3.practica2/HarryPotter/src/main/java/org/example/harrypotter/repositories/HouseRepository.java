@@ -30,4 +30,13 @@ public class HouseRepository {
     public void addHouse(House house) {
         houses.add(house);
     }
+    public void updateHouse(String name, House house) {
+        for (House h : houses) {
+            if (h.getName().equals(name)) {
+                h.setName(house.getName());
+                h.setMascot(house.getMascot());
+                h.setFounder(house.getFounder());
+            }
+        }
+    }
 }
