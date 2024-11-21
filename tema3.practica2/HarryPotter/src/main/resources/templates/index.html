@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<header>
+    <h1><a href="houses">Ir a Casas</a></h1>
+</header>
+
+<main>
+    <section>
+        <h2>Casa y Alumno Aleatorio</h2>
+        <h3>CASA</h3>
+        <div class="link-container">
+
+            <a th:href="@{'/house/' + ${houseRandom.getName()}}"
+               th:text="${houseRandom.getName()}"
+               class="random-link">Casa Aleatoria</a>
+        </div>
+        <h3>ALUMNO</h3>
+        <div class="link-container">
+
+            <a th:href="@{'/student?name=' + ${studentRandom.getName()}}"
+               th:text="${studentRandom.getName()}"
+               class="random-link">Alumno Aleatorio</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

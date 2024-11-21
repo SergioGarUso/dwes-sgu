@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario para crear casas</title>
+</head>
+<body>
+    <h1>Formulario para crear casas</h1>
+    <form action="#" th:action="@{/house/create}" th:object="${house}" method="post">
+        <p>Nombre: <input type="text" th:field="*{name}"/></p>
+        <p>Mascota: <input type="text" th:field="*{mascot}"/></p>
+        <p>Patron: <input type="text" th:field="*{founder}"/></p>
+        <input type="submit">Crear Casa</input> <input type="reset">Limpiar</input>
+    </form>
+    <a href="/houses">Volver a Casas</a>
+</body>
+</html>
