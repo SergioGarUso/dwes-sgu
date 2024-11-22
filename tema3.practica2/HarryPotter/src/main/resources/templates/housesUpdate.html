@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>Actualizar Casa</h1>
-    <form action="#" th:action="@{/house/update}" th:object="${house}" method="post">
+    <form action="#" th:action="@{/house/update/{name}(name=${house.name})}" th:object="${house}" method="post">
         <label for="name">Nombre de la casa:</label>
         <input type="text" id="name" name="name" th:field="*{name}" required>
         <br>
@@ -16,7 +16,8 @@
         <label for="mascot">Mascota:</label>
         <input type="text" id="mascot" name="mascot" th:field="*{mascot}" required>
         <br>
-        <input type="hidden" name="id" th:value="${house.id}">
         <button type="submit">Actualizar Casa</button> <button type="reset">Limpiar</button>
+    </form>
+    <a href="/houses">Volver a Casas</a>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir estudiante</title>
+</head>
+<body>
+
+<h1>Añadir estudiante</h1>
+<form action="#" th:action="@{/house/createstudent/{name}(name=${myHouse.name})}" th:object="${student}" method="post">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required>
+    <br>
+    <label for="patronus">Patrón:</label>
+    <input type="text" id="patronus" name="patronus" th:field="*{patronus}" required>
+    <br>
+    <button type="submit">Crear Estudiante</button> <button type="reset">Limpiar</button>
+</form>
+
+</body>
+</html>

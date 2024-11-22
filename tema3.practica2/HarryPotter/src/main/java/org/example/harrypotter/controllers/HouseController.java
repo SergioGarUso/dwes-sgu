@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.awt.print.Book;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class HouseController {
@@ -44,7 +45,7 @@ public class HouseController {
     }
 
     @GetMapping("/house/create")
-    public String crearHouses(Model model) {
+    public String addHouse(Model model) {
         model.addAttribute("house", new House());
         return "housesCreate";
     }
@@ -56,9 +57,57 @@ public class HouseController {
     }
 
     @GetMapping("/house/update/{name}")
-    public String updateBook(@PathVariable String name, Model model) {
+    public String updateHouse(@PathVariable String name, Model model) {
         model.addAttribute("house", houseService.getHouseByName(name));
         return "housesUpdate";
+    }
+
+    @PostMapping("/house/update/{name}")
+    public String updateHouse(@PathVariable String name, House house) {
+        houseService.updateHouse(name, house);
+        return "redirect:/houses";
+    }
+
+    @GetMapping("/house/delete/{name}")
+    public String deleteHouse(@PathVariable String name) {
+        houseService.deleteHouse(name);
+        return "redirect:/houses";
+    }
+
+    @GetMapping("/student")
+    public String showStudents(@RequestParam String name, Model model) {
+        Student student = studentService.getStudentByName(name);
+        model.addAttribute("student", student);
+        return "student";
+    }
+
+    @GetMapping("/house/createstudent/{name}")
+    public String addStudent(@PathVariable String name, Model model) {
+        House chosenHouse = houseService.getHouseByName(name);
+        model.addAttribute("myHouse", chosenHouse);
+        model.addAttribute("student", new Student());
+        return "studentCreate";
+    }
+
+    @PostMapping("/house/createstudent/{name}")
+    public String addStudent(@PathVariable String name, Student student) {
+        student.setHouse(houseService.getHouseByName(name));
+        studentService.addStudent(student);
+        return "redirect:/house/{name}";
+    }
+
+    @GetMapping("/")
+    public String createIndex(Model model) {
+        List<House> houses = houseService.getHouses();
+        List<Student> students = studentService.getStudents();
+        Random random = new Random();
+
+        House houseRandom = houses.get(random.nextInt(houses.size()));
+        model.addAttribute("houseRandom", houseRandom);
+
+        Student studentRandom = students.get(random.nextInt(students.size()));
+        model.addAttribute("studentRandom", studentRandom);
+        return "index";
     }
 
 }

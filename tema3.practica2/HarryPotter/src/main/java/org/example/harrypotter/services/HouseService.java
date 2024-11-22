@@ -9,4 +9,5 @@ public interface HouseService {
     House getHouseByName(String name);
     void addHouse(House house);
     void updateHouse(String name, House house);
+    void deleteHouse(String name);
 }

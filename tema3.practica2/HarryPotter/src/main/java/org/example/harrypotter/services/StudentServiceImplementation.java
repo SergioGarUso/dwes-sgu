@@ -1,5 +1,6 @@
 package org.example.harrypotter.services;
 
+import org.example.harrypotter.entities.House;
 import org.example.harrypotter.entities.Student;
 import org.example.harrypotter.repositories.StudentRepository;
 
@@ -22,5 +23,10 @@ public class StudentServiceImplementation implements StudentService {
 
     public List<Student> getStudentsByHouse(String house) {
         return studentRepository.getStudentsByHouse(house);
+    }
+
+    @Override
+    public void addStudent(Student student) {
+        studentRepository.addStudent(student);
     }
 }

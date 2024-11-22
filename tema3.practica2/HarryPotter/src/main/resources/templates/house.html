@@ -16,6 +16,7 @@
     <section class="house-details">
         <p th:text="'Patrón: ' + ${myHouse.founder}"></p>
         <p th:text="'Mascota: ' + ${myHouse.mascot}"></p>
+        <a th:href="@{'/house/createstudent/' + ${myHouse.name}}" class="edit-link">Añadir estudiante</a>
     </section>
 
     <section class="student-list">

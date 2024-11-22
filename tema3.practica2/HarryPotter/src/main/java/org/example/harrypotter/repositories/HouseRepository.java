@@ -38,4 +38,7 @@ public class HouseRepository {
             }
         }
     }
+    public void deleteHouse(String name) {
+        houses.removeIf(house -> house.getName().equals(name));
+    }
 }

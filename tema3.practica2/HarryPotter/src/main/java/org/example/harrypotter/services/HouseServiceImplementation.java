@@ -32,4 +32,9 @@ public class HouseServiceImplementation implements HouseService{
         houseRepository.updateHouse(name, house);
     }
 
+    @Override
+    public void deleteHouse(String name) {
+        houseRepository.deleteHouse(name);
+    }
+
 }

@@ -14,13 +14,15 @@
 
 <main>
     <ul class="house-list">
-        <a href="/houses/create" class="house-link">
+        <a href="/house/create" class="house-link">
             <span>Crear casa nueva</span>
         </a>
         <li th:each="house : ${houses}">
             <a th:href="@{'/house/' + ${house.getName()}}" class="house-link">
                 <span th:text="${house.getName()}"></span>
             </a>
+            <a th:href="@{'/house/update/' + ${house.getName()}}" class="edit-link">Editar</a>
+            <a th:href="@{'/house/delete/' + ${house.getName()}}" class="delete-link">Eliminar</a>
         </li>
     </ul>
 </main>
