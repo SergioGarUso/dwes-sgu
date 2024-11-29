@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TrabajadorService {
-    private TrabajadorRepository trabajadorRepository;
+    private final TrabajadorRepository trabajadorRepository;
 
     public TrabajadorService(TrabajadorRepository trabajadorRepository) {
-
+        this.trabajadorRepository = trabajadorRepository;
     }
 }
