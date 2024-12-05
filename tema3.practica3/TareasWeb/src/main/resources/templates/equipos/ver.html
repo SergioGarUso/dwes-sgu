@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalles del Equipo</title>
+</head>
+<body>
+<h1>Detalles del Equipo</h1>
+<p><strong>ID:</strong> <span th:text="${equipo.id}"></span></p>
+<p><strong>Nombre:</strong> <span th:text="${equipo.nombre}"></span></p>
+<h2>Miembros del Equipo</h2>
+<ul>
+    <li th:each="trabajador : ${equipo.trabajadores}" th:text="${trabajador.nombre}"></li>
+</ul>
+<a th:href="@{/equipos}">Volver a la lista</a>
+</body>
+</html>

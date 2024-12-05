@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tareas Retrasadas</title>
+</head>
+<body>
+<h1>Tareas Retrasadas</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Fecha Planificada de Cierre</th>
+        <th>Estado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tarea : ${tareasRetrasadas}">
+        <td th:text="${tarea.id}"></td>
+        <td th:text="${tarea.nombre}"></td>
+        <td th:text="${tarea.fechaPlanificadaCierre}"></td>
+        <td th:text="${tarea.estado}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

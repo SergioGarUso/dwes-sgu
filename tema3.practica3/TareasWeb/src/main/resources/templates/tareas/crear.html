@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Crear Tarea</title>
+</head>
+<body>
+<h1>Crear Nueva Tarea</h1>
+<form th:action="@{/tareas}" method="post">
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" name="nombre" required>
+
+  <label for="descripcion">Descripción:</label>
+  <textarea id="descripcion" name="descripcion" required></textarea>
+
+  <label for="fechaApertura">Fecha de Apertura:</label>
+  <input type="date" id="fechaApertura" name="fechaApertura" required>
+
+  <label for="fechaPlanificadaCierre">Fecha Planificada de Cierre:</label>
+  <input type="date" id="fechaPlanificadaCierre" name="fechaPlanificadaCierre" required>
+
+  <label for="tipo">Tipo:</label>
+  <select id="tipo" name="tipo">
+    <option value="Mejora">Mejora</option>
+    <option value="Bug">Bug</option>
+    <option value="Refactorizacion">Refactorización</option>
+  </select>
+
+  <label for="estado">Estado:</label>
+  <select id="estado" name="estado">
+    <option value="Abierta">Abierta</option>
+    <option value="En Progreso">En Progreso</option>
+    <option value="Cerrada">Cerrada</option>
+  </select>
+
+  <button type="submit">Guardar</button>
+</form>
+</body>
+</html>
