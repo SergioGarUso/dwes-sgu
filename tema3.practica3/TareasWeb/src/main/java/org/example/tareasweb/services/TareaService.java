@@ -25,12 +25,12 @@ public class TareaService {
         return tareaRepository.save(tarea);
     }
 
-    public Tarea obtenerTareaPorId(Long id) {
+    public Tarea obtenerTareaPorId(Integer id) {
         Optional<Tarea> tarea = tareaRepository.findById(id);
         return tarea.orElse(null);
     }
 
-    public Tarea actualizarTarea(Long id, Tarea tareaActualizada) {
+    public Tarea actualizarTarea(Integer id, Tarea tareaActualizada) {
         Tarea tareaExistente = obtenerTareaPorId(id);
         if (tareaExistente != null) {
             tareaExistente.setNombre(tareaActualizada.getNombre());
@@ -45,16 +45,16 @@ public class TareaService {
         return null;
     }
 
-    public void eliminarTarea(Long id) {
+    public void eliminarTarea(Integer id) {
         tareaRepository.deleteById(id);
     }
 
     public List<Tarea> obtenerTareasRetrasadas() {
-        String fechaActual = LocalDate.now().toString();
+        LocalDate fechaActual = LocalDate.now();
         return tareaRepository.findByFechaPlanificadaCierreBeforeAndEstadoNot(fechaActual, "cerrada");
     }
 
-    public List<Tarea> obtenerTareasEnCursoPorTrabajador(Long trabajadorId) {
+    public List<Tarea> obtenerTareasEnCursoPorTrabajador(Integer trabajadorId) {
         return tareaRepository.findByEstadoOrderByFechaAperturaAsc("en progreso");
     }
 

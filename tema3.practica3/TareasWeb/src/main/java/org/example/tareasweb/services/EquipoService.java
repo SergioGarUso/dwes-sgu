@@ -22,12 +22,12 @@ public class EquipoService {
         return equipoRepository.save(equipo);
     }
 
-    public Equipo obtenerEquipoPorId(Long id) {
+    public Equipo obtenerEquipoPorId(Integer id) {
         Optional<Equipo> equipo = equipoRepository.findById(id);
         return equipo.orElse(null);
     }
 
-    public Equipo actualizarEquipo(Long id, Equipo equipoActualizado) {
+    public Equipo actualizarEquipo(Integer id, Equipo equipoActualizado) {
         Equipo equipoExistente = obtenerEquipoPorId(id);
         if (equipoExistente != null) {
             equipoExistente.setNombre(equipoActualizado.getNombre());
@@ -37,7 +37,7 @@ public class EquipoService {
         return null;
     }
 
-    public void eliminarEquipo(Long id) {
+    public void eliminarEquipo(Integer id) {
         equipoRepository.deleteById(id);
     }
 }

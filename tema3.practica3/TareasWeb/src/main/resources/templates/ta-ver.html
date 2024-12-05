@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Detalles de la Tarea</title>
+</head>
+<body>
+<h1>Detalles de la Tarea</h1>
+<p><strong>ID:</strong> <span th:text="${tarea.id}"></span></p>
+<p><strong>Nombre:</strong> <span th:text="${tarea.nombre}"></span></p>
+<p><strong>Descripción:</strong> <span th:text="${tarea.descripcion}"></span></p>
+<p><strong>Fecha de Apertura:</strong> <span th:text="${tarea.fechaApertura}"></span></p>
+<p><strong>Fecha Planificada de Cierre:</strong> <span th:text="${tarea.fechaPlanificadaCierre}"></span></p>
+<p><strong>Tipo:</strong> <span th:text="${tarea.tipo}"></span></p>
+<p><strong>Estado:</strong> <span th:text="${tarea.estado}"></span></p>
+
+<h2>Trabajadores Asignados</h2>
+<ul>
+  <li th:each="trabajador : ${tarea.trabajadores}" th:text="${trabajador.nombre}"></li>
+</ul>
+<a th:href="@{/tareas}">Volver a la lista</a>
+</body>
+</html>

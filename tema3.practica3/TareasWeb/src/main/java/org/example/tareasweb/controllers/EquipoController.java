@@ -21,14 +21,14 @@ public class EquipoController {
     public String listarEquipos(Model model) {
         List<Equipo> equipos = equipoService.listarEquipos();
         model.addAttribute("equipos", equipos);
-        return "equipos/listar";
+        return "eq-listar";
     }
 
     // Crear equipo (formulario)
     @GetMapping("/crear")
     public String mostrarFormularioCrear(Model model) {
         model.addAttribute("equipo", new Equipo());
-        return "equipos/crear";
+        return "eq-crear";
     }
 
     // Guardar equipo
@@ -40,23 +40,23 @@ public class EquipoController {
 
     // Ver detalles del equipo
     @GetMapping("/{id}")
-    public String verEquipo(@PathVariable Long id, Model model) {
+    public String verEquipo(@PathVariable Integer id, Model model) {
         Equipo equipo = equipoService.obtenerEquipoPorId(id);
         model.addAttribute("equipo", equipo);
-        return "equipos/ver";
+        return "eq-ver";
     }
 
     // Modificar equipo (formulario)
     @GetMapping("/{id}/editar")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+    public String mostrarFormularioEditar(@PathVariable Integer id, Model model) {
         Equipo equipo = equipoService.obtenerEquipoPorId(id);
         model.addAttribute("equipo", equipo);
-        return "equipos/editar";
+        return "eq-editar";
     }
 
     // Actualizar equipo
     @PostMapping("/{id}/editar")
-    public String actualizarEquipo(@PathVariable Long id, @ModelAttribute Equipo equipo) {
+    public String actualizarEquipo(@PathVariable Integer id, @ModelAttribute Equipo equipo) {
         equipoService.actualizarEquipo(id, equipo);
         return "redirect:/equipos";
     }

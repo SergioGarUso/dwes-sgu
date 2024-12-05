@@ -24,14 +24,14 @@ public class TareaController {
     public String listarTareas(Model model) {
         List<Tarea> tareas = tareaService.listarTareas();
         model.addAttribute("tareas", tareas);
-        return "tareas/listar";
+        return "ta-listar";
     }
 
     @GetMapping("/crear")
     public String mostrarFormularioCrear(Model model) {
         model.addAttribute("tarea", new Tarea());
         model.addAttribute("trabajadores", trabajadorService.listarTrabajadores());
-        return "tareas/crear";
+        return "ta-crear";
     }
 
     @PostMapping("/crear")
@@ -41,22 +41,22 @@ public class TareaController {
     }
 
     @GetMapping("/{id}")
-    public String verTarea(@PathVariable Long id, Model model) {
+    public String verTarea(@PathVariable Integer id, Model model) {
         Tarea tarea = tareaService.obtenerTareaPorId(id);
         model.addAttribute("tarea", tarea);
-        return "tareas/ver";
+        return "ta-ver";
     }
 
     @GetMapping("/{id}/editar")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+    public String mostrarFormularioEditar(@PathVariable Integer id, Model model) {
         Tarea tarea = tareaService.obtenerTareaPorId(id);
         model.addAttribute("tarea", tarea);
         model.addAttribute("trabajadores", trabajadorService.listarTrabajadores());
-        return "tareas/editar";
+        return "ta-editar";
     }
 
     @PostMapping("/{id}/editar")
-    public String actualizarTarea(@PathVariable Long id, @ModelAttribute Tarea tarea) {
+    public String actualizarTarea(@PathVariable Integer id, @ModelAttribute Tarea tarea) {
         tareaService.actualizarTarea(id, tarea);
         return "redirect:/tareas";
     }

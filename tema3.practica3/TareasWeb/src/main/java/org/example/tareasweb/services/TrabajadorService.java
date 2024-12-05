@@ -22,12 +22,12 @@ public class TrabajadorService {
         return trabajadorRepository.save(trabajador);
     }
 
-    public Trabajador obtenerTrabajadorPorId(Long id) {
+    public Trabajador obtenerTrabajadorPorId(Integer id) {
         Optional<Trabajador> trabajador = trabajadorRepository.findById(id);
         return trabajador.orElse(null);
     }
 
-    public Trabajador actualizarTrabajador(Long id, Trabajador trabajadorActualizado) {
+    public Trabajador actualizarTrabajador(Integer id, Trabajador trabajadorActualizado) {
         Trabajador trabajadorExistente = obtenerTrabajadorPorId(id);
         if (trabajadorExistente != null) {
             trabajadorExistente.setNombre(trabajadorActualizado.getNombre());
@@ -39,7 +39,7 @@ public class TrabajadorService {
         return null;
     }
 
-    public void eliminarTrabajador(Long id) {
+    public void eliminarTrabajador(Integer id) {
         trabajadorRepository.deleteById(id);
     }
 }

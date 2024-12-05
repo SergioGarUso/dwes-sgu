@@ -32,7 +32,7 @@ public class Tarea {
     @Column(name = "fecha_apertura", nullable = false)
     private LocalDate fechaApertura;
 
-    @Column(name = "fecha_planificada_cierre", nullable = false)
+    @Column(name = "fecha_planificada_cierre")
     private LocalDate fechaPlanificadaCierre;
 
     @Column(name = "tipo", nullable = false)

@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Editar Equipo</h1>
-<form th:action="@{/equipos/{id}(id=${equipo.id})}" method="post">
+<form th:action="@{/equipos/{id}/editar(id=${equipo.id})}" method="post">
   <label for="nombre">Nombre:</label>
   <input type="text" id="nombre" name="nombre" th:value="${equipo.nombre}" required>
   <button type="submit">Actualizar</button>
