@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Cookies {
+public class CookiesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Cookies.class, args);
+        SpringApplication.run(CookiesApplication.class, args);
     }
 
 }
